@@ -12,26 +12,27 @@ public class OrderItem extends BaseEntity<OrderItemId> {
     private final Money price;
     private final Money subTotal;
 
+    void initializeOrderItem(OrderId orderId, OrderItemId orderItemId) {
+        this.orderId = orderId;
+        super.setId(orderItemId);
+    }
+
+    boolean isPriceValid() {
+        return price.isGreaterThanZero() &&
+                price.equals(product.getPrice()) &&
+                price.multiply(quantity).equals(subTotal);
+    }
+
     private OrderItem(Builder builder) {
         super.setId(builder.orderItemId);
-        orderId = builder.orderId;
         product = builder.product;
         quantity = builder.quantity;
         price = builder.price;
         subTotal = builder.subTotal;
     }
 
-    public boolean isValidPrice() {
-        return price.isGreaterThanZero() &&
-                price.equals(product.getPrice()) &&
-                price.multiply(quantity).equals(subTotal);
-
-
-    }
-
-    void initializeOrderItem(OrderId orderId, OrderItemId orderItemId) {
-        this.orderId = orderId;
-        super.setId(orderItemId);
+    public static Builder builder() {
+        return new Builder();
     }
 
 
@@ -55,29 +56,27 @@ public class OrderItem extends BaseEntity<OrderItemId> {
         return subTotal;
     }
 
+    public boolean isValidPrice() {
+        return price.isGreaterThanZero() &&
+                price.equals(product.getPrice()) &&
+                price.multiply(quantity).equals(subTotal);
+
+
+    }
+
+
     public static final class Builder {
         private OrderItemId orderItemId;
-        private OrderId orderId;
         private Product product;
         private int quantity;
         private Money price;
         private Money subTotal;
 
-
         private Builder() {
-        }
-
-        public static Builder newBuilder() {
-            return new Builder();
         }
 
         public Builder orderItemId(OrderItemId val) {
             orderItemId = val;
-            return this;
-        }
-
-        public Builder orderId(OrderId val) {
-            orderId = val;
             return this;
         }
 

@@ -152,6 +152,10 @@ public class Order extends AggregateRoot<OrderId> {
         }
     }
 
+    public static Order.Builder builder() {
+        return new Order.Builder();
+    }
+
     public static final class Builder {
         private OrderId orderId;
         private CustomerId customerId;
@@ -162,7 +166,7 @@ public class Order extends AggregateRoot<OrderId> {
         private TrackingId trackingId;
         private OrderStatus orderStatus;
 
-        private Builder() {
+        public Builder() {
         }
 
         public static Builder builder() {
