@@ -54,14 +54,6 @@ public class OrderCreateHelper {
         return orderCreatedEvent;
     }
 
-    private void checkCustomer(UUID customerId) {
-        Optional<Customer> customer = customerRepository.findCustomer(customerId);
-        if (customer.isEmpty()) {
-            log.warn("Could not find customer with customer id: {}", customerId);
-            throw new OrderDomainException("Could not find customer with customer id: " + customer);
-        }
-    }
-
     private Restaurant checkRestaurant(CreateOrderCommand createOrderCommand) {
         Restaurant restaurant = orderDataMapper.createOrderCommandToRestaurant(createOrderCommand);
         Optional<Restaurant> optionalRestaurant = restaurantRepository.findRestaurantInformation(restaurant);
@@ -73,6 +65,13 @@ public class OrderCreateHelper {
         return optionalRestaurant.get();
     }
 
+    private void checkCustomer(UUID customerId) {
+        Optional<Customer> customer = customerRepository.findCustomer(customerId);
+        if (customer.isEmpty()) {
+            log.warn("Could not find customer with customer id: {}", customerId);
+            throw new OrderDomainException("Could not find customer with customer id: " + customer);
+        }
+    }
 
     private Order saveOrder(Order order) {
         Order orderResult = orderRepository.save(order);
