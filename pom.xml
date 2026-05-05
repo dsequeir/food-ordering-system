@@ -18,6 +18,8 @@
         <module>common</module>
         <module>infrastructure</module>
         <module>customer-service</module>
+        <module>restaurant-service</module>
+        <module>payment-service</module>
     </modules>
     <packaging>pom</packaging>
     <properties>
