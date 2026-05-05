@@ -56,8 +56,7 @@ class OrderApplicationServiceTest {
     private final UUID RESTAURANT_ID = UUID.fromString("d215b5f8-0249-4dc5-89a3-51fd148cfb45");
     private final UUID PRODUCT_ID = UUID.fromString("d215b5f8-0249-4dc5-89a3-51fd148cfb48");
     private final UUID ORDER_ID = UUID.fromString("15a497c1-0f4b-4eff-b9f4-c402c8c07afb");
-    private final UUID SAGA_ID = UUID.fromString("15a497c1-0f4b-4eff-b9f4-c402c8c07afa");
-    private final BigDecimal PRICE = new BigDecimal("200.00");
+        private final BigDecimal PRICE = new BigDecimal("200.00");
 
     @BeforeAll
     void init() {
@@ -70,7 +69,7 @@ class OrderApplicationServiceTest {
                         .city("Paris")
                         .build())
                 .price(PRICE)
-                .orderItems(List.of(OrderItem.builder()
+                .items(List.of(OrderItem.builder()
                                 .productId(PRODUCT_ID)
                                 .quantity(1)
                                 .price(new BigDecimal("50.00"))
@@ -93,7 +92,7 @@ class OrderApplicationServiceTest {
                         .city("Paris")
                         .build())
                 .price(new BigDecimal("250.00"))
-                .orderItems(List.of(OrderItem.builder()
+                .items(List.of(OrderItem.builder()
                                 .productId(PRODUCT_ID)
                                 .quantity(1)
                                 .price(new BigDecimal("50.00"))
@@ -116,7 +115,7 @@ class OrderApplicationServiceTest {
                         .city("Paris")
                         .build())
                 .price(new BigDecimal("210.00"))
-                .orderItems(List.of(OrderItem.builder()
+                .items(List.of(OrderItem.builder()
                                 .productId(PRODUCT_ID)
                                 .quantity(1)
                                 .price(new BigDecimal("60.00"))
