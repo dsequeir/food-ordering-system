@@ -1,0 +1,46 @@
+server:
+  port: 8182
+
+logging:
+  level:
+    com.food.ordering.system: DEBUG
+
+payment-service:
+  payment-request-topic-name: payment-request
+  payment-response-topic-name: payment-response
+
+spring:
+  jpa:
+    open-in-view: false
+    show-sql: true
+    # Hibernate detectará automáticamente el dialecto correcto de Postgres
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        # Esto ayuda con los esquemas y palabras reservadas
+        default_schema: payment
+        globally_quoted_identifiers: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=payment&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+
+  # Configuración moderna para ejecución de scripts (reemplaza platform e initialization-mode)
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:init-schema.sql
+      data-locations: classpath:init-data.sql
+      continue-on-error: false
+
+kafka-config:
+  bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
+  schema-registry-url-key: schema.registry.url
+  schema-registry-url: http://localhost:8081
+  num-of-partitions: 3
+  replication-factor: 3
+
+# ... resto de tu configuración de Kafka (se mantiene igual)
