@@ -1,3 +1,6 @@
 *.class
-*.iml
 *.lst
+*.iml
+.idea/
+out/
+target/
